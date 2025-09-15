@@ -3,7 +3,7 @@ include 'koneksi.php';
 
 if (isset($_POST['submit'])) {
     $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-    $folder = "upload/";
+    $folder = "uploads/";
     $nama_file = time() . "_" . basename($_FILES['foto']['name']);
     $target_file = $folder . $nama_file;
     $kelas = $_POST['kelas'];

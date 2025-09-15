@@ -28,7 +28,7 @@
         <tbody class="divide-y divide-gray-200">
           <?php
           $no = 1;
-          $result = mysqli_query($koneksi, "SELECT * FROM siswa ORDER BY id DESC");
+          $result = mysqli_query($conn, "SELECT * FROM siswa ORDER BY id DESC");
           while ($row = mysqli_fetch_assoc($result)) {
           ?>
           <tr class="hover:bg-gray-50">

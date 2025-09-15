@@ -1,39 +1,48 @@
 <?php 
-    include 'koneksi.php';
+include 'koneksi.php';
 
-    $id = $_GET['id'];
-    $siswa = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM siswa WHERE id=$id"));
+// ambil id siswa dari url
+$id = $_GET['id'];
 
-    if(isset($_POST['update']))
-    {
-        $nama= $_POST['nama'];
-        $foto_lama = $siswa['foto'];
-        $kelas = $_POST['kelas'];
-        $jurusan = $_POST['jurusan'];
-        $email = $_POST['email'];
-        $no_hp = $_POST['no_hp'];
+// ambil data siswa lama
+$siswa = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM siswa WHERE id=$id"));
 
-        if($_FILES['foto']['name']!="") {
-            $nama_file = $_FILES['foto']['name'];
-            $tmp_file = $_FILES['foto']['tmp_name'];
-            $path = "upload/" . $nama_file;
+if(isset($_POST['update'])) {
+    $nama     = $_POST['nama'];
+    $kelas    = $_POST['kelas'];
+    $jurusan  = $_POST['jurusan'];
+    $email    = $_POST['email'];
+    $no_hp    = $_POST['no_hp'];
+    $foto_lama = $siswa['foto'];
 
-            if(move_uploaded_file($tmp_file, $path)){
-                if(file_exists("upload/" . $foto_lama)&& $foto_lama!=""){
-                    unlink("upload/" . $foto_lama);
-                }
-                $foto = $nama_file;
-            } else {
-                $foto = $foto_lama;
+    // cek apakah ada file baru
+    if($_FILES['foto']['name'] != "") {
+        $nama_file = $_FILES['foto']['name'];
+        $tmp_file  = $_FILES['foto']['tmp_name'];
+        $path      = "uploads/" . $nama_file;
+
+        if(move_uploaded_file($tmp_file, $path)){
+            // hapus foto lama kalau ada
+            if(file_exists("uploads/" . $foto_lama) && $foto_lama != ""){
+                unlink("uploads/" . $foto_lama);
             }
+            $foto = $nama_file;
         } else {
             $foto = $foto_lama;
         }
+    } else {
+        $foto = $foto_lama;
     }
 
+    // update ke database
     mysqli_query($conn, "UPDATE siswa
-    SET nama='$nama', foto='$foto', kelas='$kelas', jurusan='$jurusan', email='$email', no_hp='$no_hp'
-    WHERE id=$id");
+        SET nama='$nama', foto='$foto', kelas='$kelas', jurusan='$jurusan', email='$email', no_hp='$no_hp'
+        WHERE id=$id");
+
+    // redirect supaya tidak reload form dan muncul warning
+    header("Location: index.php");
+    exit;
+}
 ?>
 
 <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-xl p-8">
@@ -73,7 +82,7 @@
     <div>
       <label class="block text-sm font-medium text-gray-600">Foto</label>
       <div class="flex items-center gap-4 mt-2">
-        <img src="upload/<?php echo $siswa['foto']; ?>" 
+        <img src="uploads/<?php echo $siswa['foto']; ?>" 
              alt="Foto Siswa" 
              class="w-20 h-20 object-cover rounded-lg border">
         <input type="file" name="foto" 
