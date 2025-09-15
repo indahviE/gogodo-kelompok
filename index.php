@@ -40,12 +40,10 @@
             <td class="px-4 py-2"><?= $row['kelas'] ?></td>
             <td class="px-4 py-2"><?= $row['jurusan'] ?></td>
             <td class="px-4 py-2"><?= $row['email'] ?></td>
-            <td class="px-4 py-2"><?= $row['nohp'] ?></td>
-            <td class="px-4 py-2 text-center space-x-2">
+            <td class="px-4 py-2"><?= $row['no_hp'] ?></td>
+            <td class="px-4 py-2 text-center space-x-2 mb-2">
               <a href="update.php?id=<?= $row['id'] ?>" class="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Edit</a>
-            </td>
-            <td>
-              <a href="deleto.php?id=<?= $row['id'] ?>" onclick="return confirm('Apakah yakin data ingin dihapus?')" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Hapus</a>
+              <a href="deleto.php?id=<?= $row['id'] ?>" onclick="return confirm('Apakah yakin data ingin dihapus?')" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Hapus</a>\
             </td>
           </tr>
           <?php } ?>
