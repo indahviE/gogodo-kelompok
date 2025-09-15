@@ -9,7 +9,7 @@
 <body class="bg-gray-100 min-h-screen flex flex-col items-center p-8">
   <div class="w-full max-w-6xl bg-white shadow-xl rounded-xl p-6">
     <h2 class="text-3xl font-bold text-gray-800 mb-6">Data Siswa</h2>
-    <a href="tambah.php" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">+ Tambah Data</a>
+    <a href="create.php" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">+ Tambah Data</a>
 
     <div class="overflow-x-auto mt-6">
       <table class="w-full border border-gray-200 rounded-lg overflow-hidden">
@@ -42,8 +42,8 @@
             <td class="px-4 py-2"><?= $row['email'] ?></td>
             <td class="px-4 py-2"><?= $row['nohp'] ?></td>
             <td class="px-4 py-2 text-center space-x-2">
-              <a href="edit.php?id=<?= $row['id'] ?>" class="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Edit</a>
-              <a href="hapus.php?id=<?= $row['id'] ?>" onclick="return confirm('Yakin hapus?')" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Hapus</a>
+              <a href="update.php?id=<?= $row['id'] ?>" class="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Edit</a>
+              <a href="deleto.php?id=<?= $row['id'] ?>" onclick="return confirm('Apakah yakin ingin dihapus?')" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Hapus</a>
             </td>
           </tr>
           <?php } ?>
